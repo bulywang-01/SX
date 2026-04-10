@@ -1,47 +1,103 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>入隊報名</title>
+  <title>球隊入隊報名</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <h1>球隊入隊報名</h1>
 
-  <form id="registrationForm">
-    <label>球員姓名
-      <input name="name" required>
-    </label><br>
+<h1>球隊入隊報名表</h1>
 
-    <label>性別
-      <select name="gender">
-        <option>男</option>
-        <option>女</option>
-      </select>
-    </label><br>
+<form id="registrationForm">
 
-    <label>生日
-      <input type="date" name="birthday">
-    </label><br>
+  <h3>球員基本資料</h3>
+  <label>
+    球員姓名：
+    <input name="name" required>
+  </label><br><br>
 
-    <label>就讀學校
-      <input name="school">
-    </label><br>
+  <label>
+    性別：
+    <select name="gender" required>
+      <option value="">請選擇</option>
+      <option value="男">男</option>
+      <option value="女">女</option>
+    </select>
+  </label><br><br>
 
-    <label>打擊慣用
-      <select name="batting_hand">
-        <option>右</option>
-        <option>左</option>
-        <option>左右</option>
-      </select>
-    </label><br>
+  <label>
+    出生年月日：
+    <input type="date" name="birthday" required>
+  </label><br><br>
 
-    <label>監護人電話
-      <input name="guardian_phone" required>
-    </label><br>
+  <label>
+    就讀學校：
+    <input name="school">
+  </label><br><br>
 
-    <button type="submit">送出報名</button>
-  </form>
+  <label>
+    年級（升學後）：
+    <input name="grade">
+  </label><br><br>
+
+  <label>
+    打擊慣用：
+    <select name="batting_hand">
+      <option value="右">右</option>
+      <option value="左">左</option>
+      <option value="左右">左右</option>
+    </select>
+  </label><br><br>
+
+  <label>
+    投球慣用：
+    <select name="pitching_hand">
+      <option value="右">右</option>
+      <option value="左">左</option>
+      <option value="左右">左右</option>
+    </select>
+  </label><br><br>
+
+  <h3>監護人資料</h3>
+  <label>
+    監護人姓名：
+    <input name="guardian_name" required>
+  </label><br><br>
+
+  <label>
+    監護人電話：
+    <input name="guardian_phone" required>
+  </label><br><br>
+
+  <label>
+    監護人 Email：
+    <input type="email" name="guardian_email">
+  </label><br><br>
+
+  <h3>棒球背景</h3>
+  <label>
+    棒球接觸程度：
+    <select name="baseball_level">
+      <option value="第一次接觸">第一次接觸</option>
+      <option value="參加過體驗營">參加過體驗營</option>
+      <option value="加入過社區棒球隊">加入過社區棒球隊</option>
+      <option value="熟悉基本技術">熟悉基本技術</option>
+      <option value="參與過校隊或社團">參與過校隊或社團</option>
+    </select>
+  </label><br><br>
+
+  <h3>體驗時間</h3>
+  <label>
+    希望體驗日期：
+    <input type="date" name="trial_date">
+  </label><br><br>
+
+  <button type="submit">送出報名</button>
+</form>
+
 </body>
 </html>
 
-<script src="js/config.js"></script>
+<script src="js/form.js"></script>
