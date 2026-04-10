@@ -1,5 +1,5 @@
 // ⚠️ 換成你自己的 Google Apps Script Web App URL
-const API_URL = 'https://script.google.com/macros/s/XXXXXXXXXXXX/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbwWBjN-uoQrtAkGUY2TXt_wBeBvvG8M4ZrbeqpBhFtlOS9JZNDR46mqGsywqUCGt_S52Q/exec';
 
 document
   .getElementById('registrationForm')
