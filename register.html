@@ -136,6 +136,81 @@
       border-radius: 10px;
       cursor: pointer;
     }
+
+    /* =========================
+       手機 RWD 最佳化
+    ========================= */
+    @media (max-width: 640px) {
+    
+      body {
+        padding: 10px;
+      }
+    
+      .container {
+        padding: 20px 16px;
+        border-radius: 12px;
+      }
+    
+      h1 {
+        font-size: 20px;
+        line-height: 1.3;
+      }
+    
+      .subtitle {
+        font-size: 14px;
+        line-height: 1.6;
+        padding: 0 4px;
+      }
+    
+      h3 {
+        font-size: 16px;
+        margin-top: 28px;
+      }
+    
+      label {
+        font-size: 13px;
+      }
+    
+      input, select {
+        font-size: 16px; /* ✅ 防止 iOS 自動放大 */
+        padding: 10px;
+      }
+    
+      .form-grid {
+        grid-template-columns: 1fr; /* ✅ 手機一定單欄 */
+        gap: 14px;
+      }
+    
+      .option-group {
+        gap: 6px;
+      }
+    
+      .option label {
+        font-size: 13px;
+        padding: 8px 10px;
+        min-width: auto;
+      }
+    
+      button[type="submit"] {
+        font-size: 18px;
+        padding: 16px;
+        border-radius: 12px;
+      }
+    
+      /* Modal 在手機的安全距離 */
+      .message-box {
+        padding: 20px 16px;
+        margin: 0 10px;
+      }
+    
+      .message-box h2 {
+        font-size: 18px;
+      }
+    
+      .message-box p {
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
 
@@ -219,7 +294,12 @@
         <input name="guardian_name" required>
       </label>
       <label>監護人電話
-        <input name="guardian_phone" placeholder="0910-200232" required>
+        <input
+          name="guardian_phone"
+          placeholder="09xx-xxxxxx"
+          required
+          inputmode="numeric"
+        >
       </label>
       <label>監護人 Email
         <input
