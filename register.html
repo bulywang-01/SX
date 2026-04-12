@@ -146,8 +146,12 @@
     <img src="./jpg/mark.jpg" alt="三峽社區棒球隊">
   </div>
 
-  <h1>三峽社區棒球隊</h1>
-  <div class="subtitle">入隊報名表</div>
+  <h1>三峽社區棒球隊／入隊報名表</h1>
+
+  <div class="subtitle">
+    我們是一支成立於2009年的棒球隊，擁有專業的教練團隊和優質的訓練環境，
+    致力於讓每位球員在快樂中成長、在訓練中進步。
+  </div>
 
 <form id="registrationForm" novalidate>
   
@@ -357,15 +361,20 @@
 
     <button type="submit">送出報名</button>
   </form>
-
 </div>
 
+<!-- ✅ 修正重點：兄弟姊妹切換 JS 改為安全寫法 -->
 <script>
-  const y=document.getElementById('sib_y');
-  const n=document.getElementById('sib_n');
-  const b=document.getElementById('siblingsNameBlock');
-  y.addEventListener('change',()=>b.style.display='block');
-  n.addEventListener('change',()=>b.style.display='none');
+  document.addEventListener('DOMContentLoaded', () => {
+    const y = document.getElementById('sib_y');
+    const n = document.getElementById('sib_n');
+    const b = document.getElementById('siblingsNameBlock');
+
+    if (y && n && b) {
+      y.addEventListener('change', () => b.style.display = 'block');
+      n.addEventListener('change', () => b.style.display = 'none');
+    }
+  });
 </script>
 
 <script src="./js/form.js"></script>
