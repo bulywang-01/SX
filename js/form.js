@@ -19,11 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
   overlay.id = 'messageOverlay';
   overlay.innerHTML = `
     <div class="message-box">
-      <h2></h2>
-      <p></p>
-      <button>關閉</button>
-    </div>`;
+      <div class="icon">✅</div>
+      <h2 id="messageTitle"></h2>
+      <p id="messageText"></p>
+      <button id="closeMessageBtn">關閉</button>
+    </div>
+  `;
   document.body.appendChild(overlay);
+
 
   const showMsg = (t,m) => {
     overlay.querySelector('h2').innerText = t;
