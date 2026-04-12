@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ===== 表單送出 ===== */
   // form.addEventListener('submit', async (e) => {
   btn.addEventListener('click', async () => {
-    e.preventDefault();
+  //  e.preventDefault();
 
     // ✅ Email：有填就一定要合法
     if (email && email.value && !email.checkValidity()) {
