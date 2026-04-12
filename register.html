@@ -219,7 +219,13 @@
         <input name="guardian_phone" placeholder="0910-200232" required>
       </label>
       <label>監護人 Email
-        <input type="email" name="guardian_email">
+        <input
+          type="email"
+          name="guardian_email"
+          id="guardianEmail"
+          pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+          placeholder="example@gmail.com"
+        >
       </label>
     </div>
 
