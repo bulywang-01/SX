@@ -250,13 +250,58 @@
       </div>
 
     </div>
-
-    <!-- 家長協助 -->
+    
+    <!-- 招生來源 -->
+    <h3>招生來源</h3>
+    <div class="form-grid">
+    
+      <div class="form-full">
+        <label>請問您從何得知三峽社區棒球隊？（可複選）</label>
+        <div class="option-group">
+    
+          <div class="option">
+            <input type="checkbox" id="src_champion" name="source_champion" value="1">
+            <label for="src_champion">冠軍隊伍</label>
+          </div>
+    
+          <div class="option">
+            <input type="checkbox" id="src_facebook" name="source_facebook" value="1">
+            <label for="src_facebook">Facebook</label>
+          </div>
+    
+          <div class="option">
+            <input type="checkbox" id="src_friend" name="source_friend" value="1">
+            <label for="src_friend">親友介紹</label>
+          </div>
+    
+          <div class="option">
+            <input type="checkbox" id="src_other" name="source_other" value="1">
+            <label for="src_other">其他</label>
+          </div>
+    
+        </div>
+      </div>
+    
+    </div>
+    
     <h3>家長是否願意協助隊務</h3>
     <div class="option-group">
-      <div class="option"><input type="radio" id="ps_y" name="parent_support" value="願意"><label for="ps_y">願意</label></div>
-      <div class="option"><input type="radio" id="ps_m" name="parent_support" value="視情況"><label for="ps_m">視情況</label></div>
-      <div class="option"><input type="radio" id="ps_n" name="parent_support" value="不便"><label for="ps_n">不便</label></div>
+    
+      <div class="option">
+        <input type="radio" id="ps_y" name="parent_support" value="願意" required>
+        <label for="ps_y">願意</label>
+      </div>
+    
+      <div class="option">
+        <input type="radio" id="ps_m" name="parent_support" value="視情況">
+        <label for="ps_m">視情況</label>
+      </div>
+    
+      <div class="option">
+        <input type="radio" id="ps_n" name="parent_support" value="不便">
+        <label for="ps_n">不便</label>
+      </div>
+    
     </div>
 
     <!-- 棒球 -->
@@ -273,9 +318,10 @@
         </select>
       </label>
 
-      <label class="form-full">希望體驗日期
-        <input type="date" name="trial_date">
-      </label>
+    <label class="form-full">希望體驗日期（僅限週六）
+      <input type="date" name="trial_date" id="trialDate" required>
+    </label>
+
     </div>
 
     <button type="submit">送出報名</button>
