@@ -83,9 +83,23 @@ document.addEventListener('DOMContentLoaded', () => {
       if (r.ok) {
         showMsg(
           '✅ 報名完成',
-          '我們已收到您的報名資料，將由球隊幹部與您聯繫，謝謝您。'
+          `感謝您完成報名，歡迎加入我們的球隊行列！
+      
+      ＊請務必加入本隊官方 Line，告知已填完報名表體驗，以便通知球隊事務
+      ＊Line ID：@406gxvsm`
         );
+      
+        // ✅ 清空所有欄位
         form.reset();
+      
+        // ✅ 還原兄弟姊妹區塊（避免殘留顯示）
+        const sibBlock = document.getElementById('siblingsNameBlock');
+        const sibNo = document.getElementById('sib_n');
+        if (sibBlock && sibNo) {
+          sibNo.checked = true;
+          sibBlock.style.display = 'none';
+        }
+      }
 
         // 重置兄弟姊妹顯示
         const sibBlock = document.getElementById('siblingsNameBlock');
