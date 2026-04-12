@@ -3,8 +3,10 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbxKrdKlPPDlPiN1XxHFb27Q
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('registrationForm');
+  if (!form) return;
+
   const button = form.querySelector('button');
-  const phoneInput = document.querySelector('input[name="guardian_phone"]');
+  const phoneInput = form.querySelector('input[name="guardian_phone"]');
 
   /* =========================
      置中訊息 Overlay
@@ -41,11 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (phoneInput) {
     phoneInput.addEventListener('input', () => {
       let digits = phoneInput.value.replace(/\D/g, '').slice(0, 10);
-      if (digits.length > 4) {
-        phoneInput.value = digits.slice(0, 4) + '-' + digits.slice(4);
-      } else {
-        phoneInput.value = digits;
-      }
+      phoneInput.value =
+        digits.length > 4
+          ? digits.slice(0, 4) + '-' + digits.slice(4)
+          : digits;
     });
   }
 
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const formData = new FormData(form);
 
-    // ✅ 確保電話一定是字串（不被轉成數字）
+    // ✅ 確保電話一定是字串（避免 Google Sheet 吃掉 0）
     if (phoneInput) {
       formData.set('guardian_phone', phoneInput.value.toString());
     }
@@ -75,6 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
           '我們已收到您的報名資料，將由球隊幹部與您聯繫，謝謝您。'
         );
         form.reset();
+
+        // ✅ 若兄弟姊妹欄位存在，送出後恢復隱藏
+        const sibBlock = document.getElementById('siblingsNameBlock');
+        const sibNo = document.getElementById('sib_no');
+        if (sibBlock && sibNo) {
+          sibNo.checked = true;
+          sibBlock.style.display = 'none';
+        }
       } else {
         showMessage(
           '❌ 送出失敗',
