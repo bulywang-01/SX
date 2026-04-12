@@ -11,7 +11,6 @@
       background: #f5f6f8;
       padding: 20px;
     }
-
     .container {
       max-width: 860px;
       margin: auto;
@@ -20,135 +19,74 @@
       border-radius: 14px;
       box-shadow: 0 8px 28px rgba(0,0,0,.08);
     }
-
-    .logo {
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .logo img {
-      max-width: 120px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 6px;
-    }
-
+    .logo { text-align:center; margin-bottom:16px; }
+    .logo img { max-width:120px; }
+    h1 { text-align:center; margin-bottom:6px; }
     .subtitle {
-      text-align: center;
-      color: #6b7280;
-      margin-bottom: 28px;
-      font-size: 15px;
+      text-align:center; color:#6b7280;
+      margin-bottom:28px; font-size:15px;
     }
-
     h3 {
-      margin-top: 36px;
-      margin-bottom: 14px;
-      border-left: 5px solid #2563eb;
-      padding-left: 10px;
-      font-size: 18px;
+      margin-top:36px; margin-bottom:14px;
+      border-left:5px solid #2563eb;
+      padding-left:10px; font-size:18px;
     }
 
     .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px 24px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px 24px;
     }
+    .form-full { grid-column:1 / -1; }
 
-    .form-full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      color: #374151;
-    }
-
+    label { font-size:14px; color:#374151; }
     input, select {
-      width: 100%;
-      padding: 9px 10px;
-      margin-top: 6px;
-      font-size: 15px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
+      width:100%; padding:9px 10px; margin-top:6px;
+      font-size:15px; border:1px solid #d1d5db;
+      border-radius:8px;
     }
-
     input:focus, select:focus {
-      outline: none;
-      border-color: #2563eb;
-      box-shadow: 0 0 0 1px #2563eb;
-    }
-
-    .hint {
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: 4px;
+      outline:none; border-color:#2563eb;
+      box-shadow:0 0 0 1px #2563eb;
     }
 
     button {
-      margin-top: 36px;
-      width: 100%;
-      padding: 15px;
-      font-size: 16px;
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
+      margin-top:36px; width:100%;
+      padding:15px; font-size:16px;
+      background:#2563eb; color:#fff;
+      border:none; border-radius:10px;
+      cursor:pointer;
     }
+    button:disabled { background:#9ca3af; }
 
-    button:disabled {
-      background: #9ca3af;
-    }
-
-    /* ===== 卡片式選項 ===== */
-    .option-group {
-      display: flex;
-      gap: 12px;
-      margin-top: 6px;
-    }
-
-    .option {
-      flex: 1;
-    }
-
-    .option input {
-      display: none;
-    }
-
+    /* ===== 精簡卡片式選項 ===== */
+    .option-group { display:flex; gap:8px; margin-top:6px; flex-wrap:wrap; }
+    .option input { display:none; }
     .option label {
-      display: block;
-      text-align: center;
-      padding: 10px 0;
-      border: 1px solid #d1d5db;
-      border-radius: 10px;
-      cursor: pointer;
-      background: #f9fafb;
-      transition: all .2s ease;
+      min-width:56px;
+      padding:6px 10px;
+      text-align:center;
+      font-size:14px;
+      border:1px solid #d1d5db;
+      border-radius:8px;
+      cursor:pointer;
+      background:#f9fafb;
     }
-
     .option input:checked + label {
-      background: #2563eb;
-      color: #fff;
-      border-color: #2563eb;
+      background:#2563eb; color:#fff; border-color:#2563eb;
     }
 
-    @media (max-width: 640px) {
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width:640px) {
+      .form-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
 
 <body>
-
 <div class="container">
 
   <div class="logo">
-    <img src="./jpg/mark.jpg" alt="三峽社區棒球隊">
+    <img src="./jpg/mark.jpg" alt="球隊標誌">
   </div>
 
   <h1>三峽社區棒球隊</h1>
@@ -156,7 +94,7 @@
 
   <form id="registrationForm">
 
-    <!-- 球員基本資料 -->
+    <!-- 球員 -->
     <h3>球員基本資料</h3>
     <div class="form-grid">
 
@@ -193,36 +131,18 @@
       <div>
         <label>打擊慣用手</label>
         <div class="option-group">
-          <div class="option">
-            <input type="radio" id="bat_r" name="batting_hand" value="右">
-            <label for="bat_r">右</label>
-          </div>
-          <div class="option">
-            <input type="radio" id="bat_l" name="batting_hand" value="左">
-            <label for="bat_l">左</label>
-          </div>
-          <div class="option">
-            <input type="radio" id="bat_b" name="batting_hand" value="左右">
-            <label for="bat_b">左右</label>
-          </div>
+          <div class="option"><input type="radio" id="bat_r" name="batting_hand" value="右"><label for="bat_r">右</label></div>
+          <div class="option"><input type="radio" id="bat_l" name="batting_hand" value="左"><label for="bat_l">左</label></div>
+          <div class="option"><input type="radio" id="bat_b" name="batting_hand" value="左右"><label for="bat_b">左右</label></div>
         </div>
       </div>
 
       <div>
         <label>投球慣用手</label>
         <div class="option-group">
-          <div class="option">
-            <input type="radio" id="pit_r" name="pitching_hand" value="右">
-            <label for="pit_r">右</label>
-          </div>
-          <div class="option">
-            <input type="radio" id="pit_l" name="pitching_hand" value="左">
-            <label for="pit_l">左</label>
-          </div>
-          <div class="option">
-            <input type="radio" id="pit_b" name="pitching_hand" value="左右">
-            <label for="pit_b">左右</label>
-          </div>
+          <div class="option"><input type="radio" id="pit_r" name="pitching_hand" value="右"><label for="pit_r">右</label></div>
+          <div class="option"><input type="radio" id="pit_l" name="pitching_hand" value="左"><label for="pit_l">左</label></div>
+          <div class="option"><input type="radio" id="pit_b" name="pitching_hand" value="左右"><label for="pit_b">左右</label></div>
         </div>
       </div>
 
@@ -234,34 +154,24 @@
       <label class="form-full">監護人姓名
         <input name="guardian_name" required>
       </label>
-
       <label>監護人電話
         <input name="guardian_phone" placeholder="0910-200232" required>
-        <div class="hint">請輸入手機號碼</div>
       </label>
-
       <label>監護人 Email
         <input type="email" name="guardian_email">
       </label>
     </div>
 
-    <!-- 兄弟姊妹 -->
+    <!-- 家庭 -->
     <h3>家庭狀況</h3>
     <div class="form-grid">
       <div class="form-full">
         <label>是否有兄弟姊妹一起報名</label>
         <div class="option-group">
-          <div class="option">
-            <input type="radio" id="sib_yes" name="siblings_joined" value="是">
-            <label for="sib_yes">是</label>
-          </div>
-          <div class="option">
-            <input type="radio" id="sib_no" name="siblings_joined" value="否" checked>
-            <label for="sib_no">否</label>
-          </div>
+          <div class="option"><input type="radio" id="sib_yes" name="siblings_joined" value="是"><label for="sib_yes">是</label></div>
+          <div class="option"><input type="radio" id="sib_no" name="siblings_joined" value="否" checked><label for="sib_no">否</label></div>
         </div>
       </div>
-
       <div id="siblingsNameBlock" class="form-full" style="display:none;">
         <label>兄弟姊妹姓名
           <input name="siblings_names">
@@ -269,7 +179,15 @@
       </div>
     </div>
 
-    <!-- 棒球背景 -->
+    <!-- 家長協助 -->
+    <h3>家長協助隊務意願</h3>
+    <div class="option-group">
+      <div class="option"><input type="radio" id="ps_y" name="parent_support" value="願意"><label for="ps_y">願意</label></div>
+      <div class="option"><input type="radio" id="ps_m" name="parent_support" value="視情況"><label for="ps_m">視情況</label></div>
+      <div class="option"><input type="radio" id="ps_n" name="parent_support" value="不便"><label for="ps_n">不便</label></div>
+    </div>
+
+    <!-- 棒球 -->
     <h3>棒球背景</h3>
     <div class="form-grid">
       <label class="form-full">棒球接觸程度
@@ -289,21 +207,17 @@
     </div>
 
     <button type="submit">送出報名</button>
-
   </form>
 
 </div>
 
 <script src="./js/form.js"></script>
-
 <script>
-  const sibYes = document.getElementById('sib_yes');
-  const sibNo = document.getElementById('sib_no');
-  const sibBlock = document.getElementById('siblingsNameBlock');
-
-  sibYes.addEventListener('change', () => sibBlock.style.display = 'block');
-  sibNo.addEventListener('change', () => sibBlock.style.display = 'none');
+  const yes=document.getElementById('sib_yes');
+  const no=document.getElementById('sib_no');
+  const blk=document.getElementById('siblingsNameBlock');
+  yes.addEventListener('change',()=>blk.style.display='block');
+  no.addEventListener('change',()=>blk.style.display='none');
 </script>
-
 </body>
 </html>
