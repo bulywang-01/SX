@@ -7,11 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const btn = form.querySelector('button');
   const phone = form.querySelector('[name="guardian_phone"]');
-  // const email = form.querySelector('[name="guardian_email"]');
-
   const email = form.querySelector('#guardianEmail');
-  
-  /* ========= Email 驗證（保證生效） ========= */
+
+  /* ===== Email 驗證（HTML5 原生） ===== */
   if (email) {
     email.addEventListener('input', () => {
       if (email.value && !email.checkValidity()) {
@@ -22,18 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ========= 電話格式化 ========= */
+  /* ===== 電話格式化 ===== */
   phone.addEventListener('input', () => {
     let d = phone.value.replace(/\D/g, '').slice(0, 10);
     phone.value = d.length > 4 ? d.slice(0, 4) + '-' + d.slice(4) : d;
   });
 
-  /* ========= 訊息 Overlay ========= */
+  /* ===== 訊息 Overlay ===== */
   const overlay = document.createElement('div');
   overlay.id = 'messageOverlay';
   overlay.innerHTML = `
     <div class="message-box">
-      <div class="icon">⚠️</div>
+      <div class="icon">✅</div>
       <h2 id="msgTitle"></h2>
       <p id="msgText"></p>
       <button id="msgClose">關閉</button>
@@ -48,26 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.getElementById('msgClose').onclick = () => overlay.classList.remove('show');
 
-  /* ========= 表單送出 ========= */
+  /* ===== 表單送出 ===== */
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
     // ✅ Email：有填就一定要合法
     if (email && email.value && !email.checkValidity()) {
       showMsg(
         'Email 格式錯誤',
         '請確認您輸入的 Email 需要包含 @ 與網域，例如：example@gmail.com'
-      );
-      email.focus();
-      return;
-    }
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // ✅ Email：有填才檢查
-    if (email.value && !emailPattern.test(email.value)) {
-      showMsg(
-        'Email 格式錯誤',
-        '請確認您輸入的 Email 格式正確，例如：example@gmail.com'
       );
       email.focus();
       return;
@@ -84,24 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
         showMsg(
           '✅ 報名完成',
           `感謝您完成報名，歡迎加入我們的球隊行列！
-      
-      ＊請務必加入本隊官方 Line，告知已填完報名表體驗，以便通知球隊事務
-      ＊Line ID：@406gxvsm`
-        );
-      
-        // ✅ 清空所有欄位
-        form.reset();
-      
-        // ✅ 還原兄弟姊妹區塊（避免殘留顯示）
-        const sibBlock = document.getElementById('siblingsNameBlock');
-        const sibNo = document.getElementById('sib_n');
-        if (sibBlock && sibNo) {
-          sibNo.checked = true;
-          sibBlock.style.display = 'none';
-        }
-      }
 
-        // 重置兄弟姊妹顯示
+＊請務必加入本隊官方 Line，告知已填完報名表體驗，以便通知球隊事務
+＊Line ID：@406gxvsm`
+        );
+
+        // ✅ 清空表單
+        form.reset();
+
+        // ✅ 還原兄弟姊妹區塊
         const sibBlock = document.getElementById('siblingsNameBlock');
         const sibNo = document.getElementById('sib_n');
         if (sibBlock && sibNo) {
@@ -118,4 +96,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
