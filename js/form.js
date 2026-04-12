@@ -33,7 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ✅ 關鍵：只用 FormData（不加 headers、不 JSON）
     const formData = new FormData(form);
-
+    
+      formData.set(
+        'guardian_phone',
+        phoneInput.value.toString()
+      );
+    
     try {
       const res = await fetch(API_URL, {
         method: 'POST',
