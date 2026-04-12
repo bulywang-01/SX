@@ -57,6 +57,12 @@
 
 <body>
 <div class="container">
+  
+<div style="text-align:center; margin-bottom:20px;">
+  <img src="./jpg/mark.jpg"
+       alt="球隊標誌"
+       style="max-width:120px;">
+</div>
 
 <h1>球隊入隊報名表</h1>
 
@@ -134,9 +140,64 @@
   <button type="submit">送出報名</button>
 
 </form>
-
 </div>
 
+// 程式開始
+// 共用區
 <script src="./js/form.js"></script>
+
+<script>
+
+//寄信給報名人  
+function sendMailToApplicant_(data, registrationId) {
+  if (!data.guardian_email) return;
+
+  const subject = '【球隊報名成功通知】';
+  const body =
+    `您好，${data.guardian_name || '家長'}：
+
+我們已收到球員「${data.name}」的入隊報名資料。
+
+報名編號：${registrationId}
+目前狀態：資料已收到，等待球隊確認。
+
+如有後續通知，將再以 Email 聯繫，謝謝您的配合。
+
+球隊管理團隊`;
+
+  MailApp.sendEmail(
+    data.guardian_email,
+    subject,
+    body
+  );
+}
+
+// 寄信給球隊幹部
+function sendMailToStaff_(data, registrationId) {
+  const STAFF_EMAILS = [
+    'staff1@example.com',
+    'staff2@example.com'
+  ];
+
+  const subject = '【新報名通知】有人完成球隊報名';
+  const body =
+    `有新的球隊報名資料：
+
+報名編號：${registrationId}
+球員姓名：${data.name}
+學校：${data.school}
+年級：${data.grade}
+聯絡人：${data.guardian_name}
+電話：${data.guardian_phone}
+
+請登入 Google Sheet 查看完整資料。`;
+
+  STAFF_EMAILS.forEach(email => {
+    MailApp.sendEmail(email, subject, body);
+  });
+}
+
+</script>
+
 </body>
 </html>
