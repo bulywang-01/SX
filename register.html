@@ -6,152 +6,170 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-  body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont;
-    background: #f5f6f8;
-    padding: 20px;
-  }
-
-  .container {
-    max-width: 820px;
-    margin: auto;
-    background: #fff;
-    padding: 28px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,.08);
-  }
-
-  h1 {
-    text-align: center;
-    margin-bottom: 24px;
-    font-size: 24px;
-  }
-
-  h3 {
-    margin-top: 32px;
-    margin-bottom: 12px;
-    border-left: 4px solid #2563eb;
-    padding-left: 10px;
-    font-size: 18px;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px 20px;
-  }
-
-  .form-full {
-    grid-column: 1 / -1;
-  }
-
-  label {
-    display: block;
-    font-size: 14px;
-    color: #374151;
-  }
-
-  input, select {
-    width: 100%;
-    padding: 8px 10px;
-    margin-top: 6px;
-    font-size: 15px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-  }
-
-  input:focus, select:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 1px #2563eb;
-  }
-
-  button {
-    margin-top: 32px;
-    width: 100%;
-    padding: 14px;
-    font-size: 16px;
-    background: #2563eb;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-
-  button:disabled {
-    background: #9ca3af;
-  }
-
-  @media (max-width: 640px) {
-    .form-grid {
-      grid-template-columns: 1fr;
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+      background: #f5f6f8;
+      padding: 20px;
     }
-  }
 
- /* 加上「置中訊息」的 CSS */
-  #messageOverlay {
-  position: fixed;
-  inset: 0;                 /* 等同 top/left/right/bottom: 0 */
-  background: rgba(0,0,0,0.45);
+    .container {
+      max-width: 860px;
+      margin: auto;
+      background: #fff;
+      padding: 32px;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.08);
+    }
 
-  display: none;             /* 預設隱藏 */
-  align-items: center;       /* 垂直置中 */
-  justify-content: center;   /* 水平置中 */
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-  z-index: 9999;
-}
+    .logo img {
+      max-width: 120px;
+    }
 
-  /* ✅ 顯示時一定是 flex */
-  #messageOverlay.show {
-    display: flex;
-  }
-  
-  .message-box {
-    background: #ffffff;
-    padding: 28px 24px;
-    max-width: 420px;
-    width: 90%;
-    border-radius: 14px;
-    text-align: center;
-    box-shadow: 0 12px 30px rgba(0,0,0,.25);
-  }
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
 
-  .message-box h2 {
-    margin-bottom: 12px;
-  }
+    .subtitle {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 28px;
+      font-size: 15px;
+    }
 
-  .message-box button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: #2563eb;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-</style>
+    h3 {
+      margin-top: 36px;
+      margin-bottom: 14px;
+      border-left: 5px solid #2563eb;
+      padding-left: 10px;
+      font-size: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 24px;
+    }
+
+    .form-full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 9px 10px;
+      margin-top: 6px;
+      font-size: 15px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px #2563eb;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    button {
+      margin-top: 36px;
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background: #9ca3af;
+    }
+
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== 訊息 Overlay ===== */
+    #messageOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #messageOverlay.show {
+      display: flex;
+    }
+
+    .message-box {
+      background: #fff;
+      padding: 28px;
+      max-width: 420px;
+      width: 90%;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+    }
+
+    .message-box h2 {
+      margin-bottom: 12px;
+    }
+
+    .message-box button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
+
 <div class="container">
-  
-<div style="text-align:center; margin-bottom:20px;">
-  <img src="./jpg/mark.jpg"
-       alt="球隊標誌"
-       style="max-width:120px;">
-</div>
 
-<h1>球隊入隊報名表</h1>
+  <div class="logo">
+    <img src="./jpg/mark.jpg" alt="三峽社區棒球隊">
+  </div>
 
-<form id="registrationForm">
+  <h1>三峽社區棒球隊</h1>
+  <div class="subtitle">入隊報名表</div>
 
-  <h3>球員基本資料</h3>
+  <form id="registrationForm">
+
+    <!-- 球員基本資料 -->
+    <h3>球員基本資料</h3>
     <div class="form-grid">
-    
       <label class="form-full">球員姓名
         <input name="name" required>
       </label>
-    
+
       <label>性別
         <select name="gender" required>
           <option value="">請選擇</option>
@@ -159,61 +177,69 @@
           <option value="女">女</option>
         </select>
       </label>
-    
+
       <label>出生年月日
         <input type="date" name="birthday" required>
       </label>
-    
+
       <label class="form-full">就讀學校
         <input name="school">
       </label>
-    
+
       <label>年級（升學後）
         <input name="grade">
       </label>
-    
-      <label>打擊慣用
+
+      <label>打擊慣用手
         <select name="batting_hand">
+          <option value="">—</option>
           <option value="右">右</option>
           <option value="左">左</option>
           <option value="左右">左右</option>
         </select>
       </label>
-    
-      <label>投球慣用
+
+      <label>投球慣用手
         <select name="pitching_hand">
+          <option value="">—</option>
           <option value="右">右</option>
           <option value="左">左</option>
           <option value="左右">左右</option>
         </select>
       </label>
-    
+
+      <label>身高（公分）
+        <input name="height_cm">
+      </label>
+
+      <label>體重（公斤）
+        <input name="weight_kg">
+      </label>
     </div>
 
-    <h3>監護人資料</h3>
+    <!-- 監護人資料 -->
+    <h3>監護人聯絡資料</h3>
     <div class="form-grid">
       <label class="form-full">監護人姓名
         <input name="guardian_name" required>
       </label>
-    
-    <label>監護人電話
-      <input
-        name="guardian_phone"
-        inputmode="numeric"
-        placeholder="0910-200232"
-        maxlength="11"
-      >
-    </label>
-      
+
+      <label>監護人電話
+        <input name="guardian_phone" placeholder="0910-200232" required>
+        <div class="hint">請輸入手機號碼</div>
+      </label>
+
       <label>監護人 Email
         <input type="email" name="guardian_email">
       </label>
     </div>
 
-    <h3>棒球背景</h3>
+    <!-- 棒球背景 -->
+    <h3>棒球背景與經驗</h3>
     <div class="form-grid">
       <label class="form-full">棒球接觸程度
         <select name="baseball_level">
+          <option value="">—</option>
           <option value="第一次接觸">第一次接觸</option>
           <option value="參加過體驗營">參加過體驗營</option>
           <option value="加入過社區棒球隊">加入過社區棒球隊</option>
@@ -221,19 +247,54 @@
           <option value="參與過校隊或社團">參與過校隊或社團</option>
         </select>
       </label>
-    
-      <label>希望體驗日期
+
+      <label>是否曾加入其他球隊
+        <input name="other_team_status">
+      </label>
+
+      <label>是否有兄弟姊妹一起報名
+        <input name="siblings_joined">
+      </label>
+
+      <label>兄弟姊妹姓名
+        <input name="siblings_names">
+      </label>
+
+      <label>家長是否願意協助隊務
+        <input name="parent_support">
+      </label>
+    </div>
+
+    <!-- 招生來源 / 體驗 -->
+    <h3>其他資訊</h3>
+    <div class="form-grid">
+      <label>得知球隊來源（冠軍）
+        <input type="checkbox" name="source_champion" value="1">
+      </label>
+
+      <label>得知球隊來源（Facebook）
+        <input type="checkbox" name="source_facebook" value="1">
+      </label>
+
+      <label>得知球隊來源（親友介紹）
+        <input type="checkbox" name="source_friend" value="1">
+      </label>
+
+      <label>其他來源
+        <input type="checkbox" name="source_other" value="1">
+      </label>
+
+      <label class="form-full">希望體驗日期
         <input type="date" name="trial_date">
       </label>
     </div>
 
-  <button type="submit">送出報名</button>
+    <button type="submit">送出報名</button>
 
-</form>
+  </form>
+
 </div>
 
-<!-- 程式開始 -->
-<!-- 共用區 -->
 <script src="./js/form.js"></script>
 
 </body>
