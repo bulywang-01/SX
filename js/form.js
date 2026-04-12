@@ -4,41 +4,65 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbxVbTv_QNXkV79qadf6QFgf
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('registrationForm');
   const button = form.querySelector('button');
+  const phoneInput = document.querySelector('input[name="guardian_phone"]');
 
-  // 建立置中訊息框
+  /* =========================
+     置中訊息 Overlay
+  ========================= */
   const overlay = document.createElement('div');
   overlay.id = 'messageOverlay';
   overlay.innerHTML = `
     <div class="message-box">
       <h2 id="messageTitle"></h2>
       <p id="messageText"></p>
-      <button onclick="closeMessage()">關閉</button>
+      <button id="closeMessageBtn">關閉</button>
     </div>
   `;
   document.body.appendChild(overlay);
 
-  window.showMessage = (title, text) => {
+  const showMessage = (title, text) => {
     document.getElementById('messageTitle').innerText = title;
     document.getElementById('messageText').innerText = text;
-    overlay.style.display = 'flex';
+    overlay.classList.add('show');
   };
 
-  window.closeMessage = () => {
-    overlay.style.display = 'none';
+  const closeMessage = () => {
+    overlay.classList.remove('show');
   };
 
+  document
+    .getElementById('closeMessageBtn')
+    .addEventListener('click', closeMessage);
+
+  /* =========================
+     監護人電話即時格式化
+     0910200232 → 0910-200232
+  ========================= */
+  if (phoneInput) {
+    phoneInput.addEventListener('input', () => {
+      let digits = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+      if (digits.length > 4) {
+        phoneInput.value = digits.slice(0, 4) + '-' + digits.slice(4);
+      } else {
+        phoneInput.value = digits;
+      }
+    });
+  }
+
+  /* =========================
+     表單送出
+  ========================= */
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     button.disabled = true;
 
-    // ✅ 關鍵：只用 FormData（不加 headers、不 JSON）
     const formData = new FormData(form);
-    
-      formData.set(
-        'guardian_phone',
-        phoneInput.value.toString()
-      );
-    
+
+    // ✅ 確保電話一定是字串（不被轉成數字）
+    if (phoneInput) {
+      formData.set('guardian_phone', phoneInput.value.toString());
+    }
+
     try {
       const res = await fetch(API_URL, {
         method: 'POST',
@@ -68,21 +92,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
-// ✅ 監護人電話即時格式化：09xxxxxxxx → 09xx-xxxxxx
-const phoneInput = document.querySelector('input[name="guardian_phone"]');
-
-if (phoneInput) {
-  phoneInput.addEventListener('input', () => {
-    let digits = phoneInput.value.replace(/\D/g, '').slice(0, 10);
-
-    if (digits.length > 4) {
-      phoneInput.value = digits.slice(0, 4) + '-' + digits.slice(4);
-    } else {
-      phoneInput.value = digits;
-    }
-  });
-}
-    } finally {
-      button.disabled = false;
-    }
