@@ -7,6 +7,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const phone = form.querySelector('[name="guardian_phone"]');
   const email = document.getElementById('guardianEmail');
 
+  /* =========================
+     體驗日期限制：僅限今天之後的星期六
+     （台灣時區安全版）
+  ========================= */
+  const trialDateInput = document.getElementById('trialDate');
+  
+  if (trialDateInput) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+  
+    // 找到「今天之後」的第一個星期六
+    const firstSaturday = new Date(today);
+    const day = firstSaturday.getDay(); // 0=日, 6=六
+    let diff = 6 - day;
+    if (diff <= 0) diff += 7; // 一定是「之後」的星期六
+    firstSaturday.setDate(firstSaturday.getDate() + diff);
+  
+    // 轉成本地 YYYY-MM-DD（避免 UTC 問題）
+    const yyyy = firstSaturday.getFullYear();
+    const mm = String(firstSaturday.getMonth() + 1).padStart(2, '0');
+    const dd = String(firstSaturday.getDate()).padStart(2, '0');
+    const minDateStr = `${yyyy}-${mm}-${dd}`;
+  
+    // ✅ 核心三件事
+    trialDateInput.min = minDateStr;
+    trialDateInput.step = 7; // 每 7 天只能跳星期六
+  
+    // ✅ 防止手動輸入作弊
+    trialDateInput.addEventListener('change', () => {
+      const selected = new Date(trialDateInput.value);
+      selected.setHours(0, 0, 0, 0);
+  
+      if (selected < firstSaturday || selected.getDay() !== 6) {
+        alert('體驗日期僅開放「今天之後的星期六」，請重新選擇。');
+        trialDateInput.value = '';
+      }
+    });
+  }
+  
   /* ===== Email 驗證（HTML5 原生） ===== */
   if (email) {
     email.addEventListener('input', () => {
