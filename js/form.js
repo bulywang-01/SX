@@ -7,10 +7,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const btn = form.querySelector('button');
   const phone = form.querySelector('[name="guardian_phone"]');
-  const email = form.querySelector('[name="guardian_email"]');
+  // const email = form.querySelector('[name="guardian_email"]');
 
-  /* ========= Email 檢查規則 ========= */
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const email = form.querySelector('#guardianEmail');
+  
+  /* ========= Email 驗證（保證生效） ========= */
+  if (email) {
+    email.addEventListener('input', () => {
+      if (email.value && !email.checkValidity()) {
+        email.setCustomValidity('請輸入正確的 Email，例如：example@gmail.com');
+      } else {
+        email.setCustomValidity('');
+      }
+    });
+  }
 
   /* ========= 電話格式化 ========= */
   phone.addEventListener('input', () => {
@@ -39,6 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('msgClose').onclick = () => overlay.classList.remove('show');
 
   /* ========= 表單送出 ========= */
+
+    // ✅ Email：有填就一定要合法
+    if (email && email.value && !email.checkValidity()) {
+      showMsg(
+        'Email 格式錯誤',
+        '請確認您輸入的 Email 需要包含 @ 與網域，例如：example@gmail.com'
+      );
+      email.focus();
+      return;
+    }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
