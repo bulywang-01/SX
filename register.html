@@ -211,6 +211,32 @@
         font-size: 14px;
       }
     }
+
+    /* =========================
+       手機：長文字選項改為直向顯示
+       （招生來源 / 家長協助）
+    ========================= */
+    @media (max-width: 640px) {
+    
+      /* 招生來源 & 家長協助：一列一個 */
+      .form-grid .option-group,
+      .option-group.long-options {
+        flex-direction: column;
+        gap: 10px;
+      }
+    
+      .form-grid .option-group .option label,
+      .option-group.long-options .option label {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 12px 14px;
+        line-height: 1.5;
+        font-size: 14px;
+        border-radius: 10px;
+      }
+    
+    }
   </style>
 </head>
 
@@ -341,6 +367,8 @@
     </div>
     
     <h3>招生來源</h3>
+    
+<div class="option-group long-options">
     <div class="form-grid">
       <div class="form-full">
         <label>請問您從何得知三峽社區棒球隊？（可複選）</label>
@@ -381,10 +409,12 @@
         </div>
       </div>
     </div>
-    
+</div>
+  
     <h3>家長是否願意協助隊務</h3>
+
+<div class="option-group long-options">
     <div class="option-group">
-    
       <div class="option">
         <input
           type="radio"
@@ -415,8 +445,8 @@
         >
         <label for="ps_no">我可能工作或其它事務繁忙，沒辦法協助</label>
       </div>
-    
     </div>
+  </div>
 
     <!-- 棒球 -->
     <h3>棒球背景</h3>
