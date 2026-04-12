@@ -1,84 +1,123 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <title>球隊入隊報名</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+      background: #f5f6f8;
+      padding: 20px;
+    }
+    .container {
+      max-width: 720px;
+      margin: auto;
+      background: #fff;
+      padding: 24px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    h3 {
+      margin-top: 24px;
+      border-left: 4px solid #2563eb;
+      padding-left: 8px;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      font-size: 15px;
+    }
+    button {
+      margin-top: 24px;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: #9ca3af;
+    }
+  </style>
 </head>
+
 <body>
+<div class="container">
 
 <h1>球隊入隊報名表</h1>
 
 <form id="registrationForm">
 
   <h3>球員基本資料</h3>
-  <label>
-    球員姓名：
+  <label>球員姓名
     <input name="name" required>
-  </label><br><br>
+  </label>
 
-  <label>
-    性別：
+  <label>性別
     <select name="gender" required>
       <option value="">請選擇</option>
       <option value="男">男</option>
       <option value="女">女</option>
     </select>
-  </label><br><br>
+  </label>
 
-  <label>
-    出生年月日：
+  <label>出生年月日
     <input type="date" name="birthday" required>
-  </label><br><br>
+  </label>
 
-  <label>
-    就讀學校：
+  <label>就讀學校
     <input name="school">
-  </label><br><br>
+  </label>
 
-  <label>
-    年級（升學後）：
+  <label>年級（升學後）
     <input name="grade">
-  </label><br><br>
+  </label>
 
-  <label>
-    打擊慣用：
+  <label>打擊慣用
     <select name="batting_hand">
       <option value="右">右</option>
       <option value="左">左</option>
       <option value="左右">左右</option>
     </select>
-  </label><br><br>
+  </label>
 
-  <label>
-    投球慣用：
+  <label>投球慣用
     <select name="pitching_hand">
       <option value="右">右</option>
       <option value="左">左</option>
       <option value="左右">左右</option>
     </select>
-  </label><br><br>
+  </label>
 
   <h3>監護人資料</h3>
-  <label>
-    監護人姓名：
+  <label>監護人姓名
     <input name="guardian_name" required>
-  </label><br><br>
+  </label>
 
-  <label>
-    監護人電話：
+  <label>監護人電話
     <input name="guardian_phone" required>
-  </label><br><br>
+  </label>
 
-  <label>
-    監護人 Email：
+  <label>監護人 Email
     <input type="email" name="guardian_email">
-  </label><br><br>
+  </label>
 
   <h3>棒球背景</h3>
-  <label>
-    棒球接觸程度：
+  <label>棒球接觸程度
     <select name="baseball_level">
       <option value="第一次接觸">第一次接觸</option>
       <option value="參加過體驗營">參加過體驗營</option>
@@ -86,20 +125,18 @@
       <option value="熟悉基本技術">熟悉基本技術</option>
       <option value="參與過校隊或社團">參與過校隊或社團</option>
     </select>
-  </label><br><br>
+  </label>
 
-  <h3>體驗時間</h3>
-  <label>
-    希望體驗日期：
+  <label>希望體驗日期
     <input type="date" name="trial_date">
-  </label><br><br>
+  </label>
 
   <button type="submit">送出報名</button>
+
 </form>
 
-<script src="js/form.js"></script>
+</div>
 
+<script src="./js/form.js"></script>
 </body>
 </html>
-
-
