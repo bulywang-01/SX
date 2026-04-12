@@ -63,3 +63,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// ✅ 監護人電話即時格式化：09xxxxxxxx → 09xx-xxxxxx
+const phoneInput = document.querySelector('input[name="guardian_phone"]');
+
+if (phoneInput) {
+  phoneInput.addEventListener('input', () => {
+    let digits = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+
+    if (digits.length > 4) {
+      phoneInput.value = digits.slice(0, 4) + '-' + digits.slice(4);
+    } else {
+      phoneInput.value = digits;
+    }
+  });
+}
+    } finally {
+      button.disabled = false;
+    }
