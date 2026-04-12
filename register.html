@@ -251,22 +251,22 @@
 
     </div>
     
-    <!-- 招生來源 -->
     <h3>招生來源</h3>
     <div class="form-grid">
-    
       <div class="form-full">
         <label>請問您從何得知三峽社區棒球隊？（可複選）</label>
         <div class="option-group">
     
           <div class="option">
             <input type="checkbox" id="src_champion" name="source_champion" value="1">
-            <label for="src_champion">我知道貴隊是114年度全國社區學生棒球大賽冠軍</label>
+            <label for="src_champion">
+              我知道這球隊是114年度全國社區學生棒球大賽冠軍
+            </label>
           </div>
     
           <div class="option">
-            <input type="checkbox" id="src_facebook" name="source_facebook" value="1">
-            <label for="src_facebook">球隊FB官網</label>
+            <input type="checkbox" id="src_fb" name="source_facebook" value="1">
+            <label for="src_fb">球隊 FB 官網</label>
           </div>
     
           <div class="option">
@@ -275,41 +275,56 @@
           </div>
     
           <div class="option">
-            <input type="checkbox" id="src_other" name="source_other" value="1">
-            <label for="src_other">紙本傳單</label>
+            <input type="checkbox" id="src_flyer" name="source_flyer" value="1">
+            <label for="src_flyer">紙本傳單</label>
           </div>
-          
+    
+          <div class="option">
+            <input type="checkbox" id="src_store" name="source_store" value="1">
+            <label for="src_store">貼於店家的廣告單</label>
+          </div>
+    
           <div class="option">
             <input type="checkbox" id="src_other" name="source_other" value="1">
-            <label for="src_other">貼於店家的廣告單</label>
+            <label for="src_other">其他</label>
           </div>
-            
-          <div class="option">
-            <input type="checkbox" id="src_other" name="source_other" value="1">
-            <label for="src_other">其它</label>
-          </div>
-          
+    
         </div>
       </div>
-    
     </div>
     
     <h3>家長是否願意協助隊務</h3>
     <div class="option-group">
     
       <div class="option">
-        <input type="radio" id="ps_y" name="parent_support" value="願意" required>
-        <label for="ps_y">我很樂意協助，請找我</label>
+        <input
+          type="radio"
+          id="ps_yes"
+          name="parent_support"
+          value="我很樂意協助，請找我"
+          required
+        >
+        <label for="ps_yes">我很樂意協助，請找我</label>
       </div>
     
       <div class="option">
-        <input type="radio" id="ps_m" name="parent_support" value="視情況">
-        <label for="ps_m">視情況，有空的時候可以協助</label>
+        <input
+          type="radio"
+          id="ps_maybe"
+          name="parent_support"
+          value="視情況，有空的時候可以協助"
+        >
+        <label for="ps_maybe">視情況，有空的時候可以協助</label>
       </div>
     
       <div class="option">
-        <input type="radio" id="ps_n" name="parent_support" value="不便">
-        <label for="ps_n">我可能工作或其它事務較繁忙，沒辦法協助</label>
+        <input
+          type="radio"
+          id="ps_no"
+          name="parent_support"
+          value="我可能工作或其它事務繁忙，沒辦法協助"
+        >
+        <label for="ps_no">我可能工作或其它事務繁忙，沒辦法協助</label>
       </div>
     
     </div>
