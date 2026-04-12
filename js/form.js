@@ -2,12 +2,10 @@
 const API_URL = 'https://script.google.com/macros/s/AKfycbyYI-2tTxo2SeSh13edptjcVUY7PsYXOek5gHVj7pcuT3aEw6yfQwJj6lanpFVo-H-utQ/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
-
   const form = document.getElementById('registrationForm');
   const btn  = form.querySelector('button');
   const phone = form.querySelector('[name="guardian_phone"]');
   const email = document.getElementById('guardianEmail');
-
 
   /* ===== Email 驗證（HTML5 原生） ===== */
   if (email) {
