@@ -35,6 +35,41 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   overlay.querySelector('button').onclick = () => overlay.classList.remove('show');
 
+/* =========================
+   體驗日期限制：
+   - 只能選今天之後的「星期六」
+========================= */
+const trialDateInput = document.getElementById('trialDate');
+
+if (trialDateInput) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // ✅ 找到「今天之後的第一個星期六」
+  const firstSaturday = new Date(today);
+  const day = firstSaturday.getDay(); // 0 = 日, 6 = 六
+  const offset = (6 - day + 7) % 7 || 7; // 確保是「之後的」週六
+  firstSaturday.setDate(firstSaturday.getDate() + offset);
+
+  // ✅ 設定最小日期
+  trialDateInput.min = firstSaturday.toISOString().split('T')[0];
+
+  // ✅ step = 7 天（只能每週六跳）
+  trialDateInput.step = 7;
+
+  // ✅ 防止手動輸入非法日期
+  trialDateInput.addEventListener('change', () => {
+    const selected = new Date(trialDateInput.value);
+    const isSaturday = selected.getDay() === 6;
+    const isAfterMin = selected >= firstSaturday;
+
+    if (!isSaturday || !isAfterMin) {
+      trialDateInput.value = '';
+      alert('體驗日期僅開放「今天之後的星期六」，請重新選擇。');
+    }
+  });
+}
+
   /* 表單送出 */
   form.onsubmit = async (e) => {
     e.preventDefault();
@@ -55,4 +90,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 });
-``
+
