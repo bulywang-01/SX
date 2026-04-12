@@ -6,53 +6,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont;
-      background: #f5f6f8;
-      padding: 20px;
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont;
+    background: #f5f6f8;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: auto;
+    background: #fff;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 24px;
+  }
+
+  h3 {
+    margin-top: 32px;
+    margin-bottom: 12px;
+    border-left: 4px solid #2563eb;
+    padding-left: 10px;
+    font-size: 18px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 20px;
+  }
+
+  .form-full {
+    grid-column: 1 / -1;
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    color: #374151;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 6px;
+    font-size: 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 1px #2563eb;
+  }
+
+  button {
+    margin-top: 32px;
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    background: #9ca3af;
+  }
+
+  @media (max-width: 640px) {
+    .form-grid {
+      grid-template-columns: 1fr;
     }
-    .container {
-      max-width: 720px;
-      margin: auto;
-      background: #fff;
-      padding: 24px;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,.08);
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    h3 {
-      margin-top: 24px;
-      border-left: 4px solid #2563eb;
-      padding-left: 8px;
-    }
-    label {
-      display: block;
-      margin-top: 12px;
-    }
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-      font-size: 15px;
-    }
-    button {
-      margin-top: 24px;
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button:disabled {
-      background: #9ca3af;
-    }
-  </style>
+  }
+</style>
 </head>
 
 <body>
@@ -69,73 +104,81 @@
 <form id="registrationForm">
 
   <h3>球員基本資料</h3>
-  <label>球員姓名
-    <input name="name" required>
-  </label>
+    <div class="form-grid">
+    
+      <label class="form-full">球員姓名
+        <input name="name" required>
+      </label>
+    
+      <label>性別
+        <select name="gender" required>
+          <option value="">請選擇</option>
+          <option value="男">男</option>
+          <option value="女">女</option>
+        </select>
+      </label>
+    
+      <label>出生年月日
+        <input type="date" name="birthday" required>
+      </label>
+    
+      <label class="form-full">就讀學校
+        <input name="school">
+      </label>
+    
+      <label>年級（升學後）
+        <input name="grade">
+      </label>
+    
+      <label>打擊慣用
+        <select name="batting_hand">
+          <option value="右">右</option>
+          <option value="左">左</option>
+          <option value="左右">左右</option>
+        </select>
+      </label>
+    
+      <label>投球慣用
+        <select name="pitching_hand">
+          <option value="右">右</option>
+          <option value="左">左</option>
+          <option value="左右">左右</option>
+        </select>
+      </label>
+    
+    </div>
 
-  <label>性別
-    <select name="gender" required>
-      <option value="">請選擇</option>
-      <option value="男">男</option>
-      <option value="女">女</option>
-    </select>
-  </label>
+    <h3>監護人資料</h3>
+    <div class="form-grid">
+      <label class="form-full">監護人姓名
+        <input name="guardian_name" required>
+      </label>
+    
+      <label>監護人電話
+        <input name="guardian_phone" required>
+      </label>
+    
+      <label>監護人 Email
+        <input type="email" name="guardian_email">
+      </label>
+    </div>
 
-  <label>出生年月日
-    <input type="date" name="birthday" required>
-  </label>
-
-  <label>就讀學校
-    <input name="school">
-  </label>
-
-  <label>年級（升學後）
-    <input name="grade">
-  </label>
-
-  <label>打擊慣用
-    <select name="batting_hand">
-      <option value="右">右</option>
-      <option value="左">左</option>
-      <option value="左右">左右</option>
-    </select>
-  </label>
-
-  <label>投球慣用
-    <select name="pitching_hand">
-      <option value="右">右</option>
-      <option value="左">左</option>
-      <option value="左右">左右</option>
-    </select>
-  </label>
-
-  <h3>監護人資料</h3>
-  <label>監護人姓名
-    <input name="guardian_name" required>
-  </label>
-
-  <label>監護人電話
-    <input name="guardian_phone" required>
-  </label>
-
-  <label>監護人 Email
-    <input type="email" name="guardian_email">
-  </label>
-
-  <h3>棒球背景</h3>
-  <label>棒球接觸程度
-    <select name="baseball_level">
-      <option value="第一次接觸">第一次接觸</option>
-      <option value="參加過體驗營">參加過體驗營</option>
-      <option value="加入過社區棒球隊">加入過社區棒球隊</option>
-      <option value="熟悉基本技術">熟悉基本技術</option>
-      <option value="參與過校隊或社團">參與過校隊或社團</option>
-    </select>
-  </label>
-
-  <label>希望體驗日期
-    <input type="date" name="trial_date">
-  </label>
+    <h3>棒球背景</h3>
+    <div class="form-grid">
+      <label class="form-full">棒球接觸程度
+        <select name="baseball_level">
+          <option value="第一次接觸">第一次接觸</option>
+          <option value="參加過體驗營">參加過體驗營</option>
+          <option value="加入過社區棒球隊">加入過社區棒球隊</option>
+          <option value="熟悉基本技術">熟悉基本技術</option>
+          <option value="參與過校隊或社團">參與過校隊或社團</option>
+        </select>
+      </label>
+    
+      <label>希望體驗日期
+        <input type="date" name="trial_date">
+      </label>
+    </div>
 
   <button type="submit">送出報名</button>
 
@@ -147,55 +190,6 @@
 <script src="./js/form.js"></script>
 
 <script>
-
-//寄信給報名人  
-function sendMailToApplicant_(data, registrationId) {
-  if (!data.guardian_email) return;
-
-  const subject = '【球隊報名成功通知】';
-  const body =
-    `您好，${data.guardian_name || '家長'}：
-
-我們已收到球員「${data.name}」的入隊報名資料。
-
-報名編號：${registrationId}
-目前狀態：資料已收到，等待球隊確認。
-
-如有後續通知，將再以 Email 聯繫，謝謝您的配合。
-
-球隊管理團隊`;
-
-  MailApp.sendEmail(
-    data.guardian_email,
-    subject,
-    body
-  );
-}
-
-// 寄信給球隊幹部
-function sendMailToStaff_(data, registrationId) {
-  const STAFF_EMAILS = [
-    'staff1@example.com',
-    'staff2@example.com'
-  ];
-
-  const subject = '【新報名通知】有人完成球隊報名';
-  const body =
-    `有新的球隊報名資料：
-
-報名編號：${registrationId}
-球員姓名：${data.name}
-學校：${data.school}
-年級：${data.grade}
-聯絡人：${data.guardian_name}
-電話：${data.guardian_phone}
-
-請登入 Google Sheet 查看完整資料。`;
-
-  STAFF_EMAILS.forEach(email => {
-    MailApp.sendEmail(email, subject, body);
-  });
-}
 
 </script>
 
