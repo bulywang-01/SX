@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (r.ok) {
         showMsg(
-        '報名完成'
+        '報名完成',
         `歡迎加入三峽社區棒球隊的行列
         
         請務必加入本隊官方Line
