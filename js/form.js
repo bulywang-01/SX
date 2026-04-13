@@ -1,5 +1,5 @@
 // Google Apps Script Web App URL
-const API_URL = 'https://script.google.com/macros/s/AKfycbwql2oSi-BzdAZdghD_EpDJcwsNqPYuGLvpYpFE3asj_02EdaABEuu0cXrveyJ0lb3EYQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbzCc6J_1vO03IDSlFi3NQMkY15vDXGfoSWtqfGBO4RQ3jC-Df0-eOENiWBmymHt_KN4kQ/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('registrationForm');
