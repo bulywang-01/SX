@@ -1,0 +1,11 @@
+registrations
+      │
+      └──▶ players
+              │
+              ├── attendance
+              │
+              ├── billing ◀── fee_rules
+              │
+              └── player_team_assignments ──▶ teams
+                            │
+                            └── events
