@@ -235,8 +235,27 @@
         font-size: 14px;
         border-radius: 10px;
       }
-    
     }
+
+    /* ===== 重點欄位：希望體驗日期 ===== */
+      .highlight-field {
+        border: 2px solid #2563eb;
+        background: #f0f9ff;
+        border-radius: 10px;
+        padding: 12px 14px;
+      }
+      
+      .highlight-field label {
+        font-weight: 600;
+      }
+      
+      .highlight-field input {
+        border-color: #2563eb;
+        background: #ffffff;
+      }
+      .highlight-field input:focus {
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+      }
   </style>
 </head>
 
@@ -264,10 +283,11 @@
         <input name="name" required>
       </label>
     
-      <label>
+      <label class="highlight-field">
         希望體驗日期（僅限週六）
         <input type="date" name="trial_date" id="trialDate" required>
       </label>
+      <div class="hint">※ 球隊將依此日期安排體驗，請務必確認</div>
 
 
       <div class="form-full">
