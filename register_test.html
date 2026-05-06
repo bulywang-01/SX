@@ -256,6 +256,30 @@
       .highlight-field input:focus {
         box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
       }
+    /* ===== 重點欄位：希望體驗日期（正確版）===== */
+      .highlight-wrapper {
+        border: 2px solid #2563eb;
+        background: #f0f9ff;
+        border-radius: 12px;
+        padding: 12px 14px;
+      }
+      
+      .highlight-wrapper label {
+        display: block;
+        font-weight: 600;
+      }
+      
+      .highlight-wrapper input {
+        margin-top: 6px;
+        border-color: #2563eb;
+        background: #ffffff;
+        width: 100%;
+        box-sizing: border-box; /* ✅ 保險再加一層 */
+      }
+      
+      .highlight-wrapper input:focus {
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+      }
   </style>
 </head>
 
@@ -283,11 +307,14 @@
         <input name="name" required>
       </label>
     
-      <label class="highlight-field">
-        希望體驗日期（僅限週六）
-        <input type="date" name="trial_date" id="trialDate" required>
-      </label>
-      <div class="hint">※ 球隊將依此日期安排體驗，請務必確認</div>
+      <div class="highlight-wrapper">
+        <label>
+          希望體驗日期（僅限週六）
+          <input type="date" name="trial_date" id="trialDate" required>
+        </label>
+         <div class="hint">※ 球隊將依此日期安排體驗，請務必確認</div>
+     </div>
+
 
 
       <div class="form-full">
