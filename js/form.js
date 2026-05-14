@@ -1,4 +1,3 @@
-// Google Apps Script Web App URL
 const API_URL = 'https://script.google.com/macros/s/AKfycby9KLXCqnZNOKHCxkWOX3vuIhC2NpwX8wCEmfXkkepZrhzg225FtHFq05q2ssU48GRWrA/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,27 +6,53 @@ document.addEventListener('DOMContentLoaded', () => {
   const btn = form.querySelector('button');
   const phone = form.querySelector('[name="guardian_phone"]');
   const email = document.getElementById('guardianEmail');
+  const trialDateInput = document.getElementById('trialDate');
 
   /* =========================
-     ✅ 必填控制（data-required）
+     ✅ 必填控制
   ========================= */
   const applyRequired = () => {
     document.querySelectorAll('[data-required]').forEach(el => {
       if (el.dataset.required === 'true') {
         el.setAttribute('required', 'required');
-      } else {
-        el.removeAttribute('required');
       }
     });
   };
-
   applyRequired();
 
   /* =========================
-     ✅ 群組驗證（checkbox / radio）
+     ✅ 錯誤標記
+  ========================= */
+  const markError = (el) => {
+    el.classList.add('input-error');
+
+    const wrap = el.closest('label, .highlight-wrapper, div');
+    if (wrap) {
+      wrap.classList.add('error');
+      wrap.classList.add('shake');
+    }
+
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    setTimeout(() => {
+      wrap?.classList.remove('shake');
+    }, 400);
+  };
+
+  const clearError = (el) => {
+    el.classList.remove('input-error');
+    el.closest('label, .highlight-wrapper, div')?.classList.remove('error');
+  };
+
+  form.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('input', () => clearError(el));
+    el.addEventListener('change', () => clearError(el));
+  });
+
+  /* =========================
+     ✅ group 驗證
   ========================= */
   const checkGroupRequired = () => {
-
     const groups = {};
 
     document.querySelectorAll('[data-required="true"][data-group]')
@@ -46,26 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const label = first.dataset.label || groupName;
 
         showMsg('資料未填', `請至少選擇一項：「${label}」`);
-        first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        markError(first);
         return false;
       }
     }
-
     return true;
   };
 
   /* =========================
-     ✅ 體驗日期限制：只能選週六
+     ✅ 日期限制 + 顯示星期
   ========================= */
-  const trialDateInput = document.getElementById('trialDate');
-
   if (trialDateInput) {
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
     const firstSaturday = new Date(today);
-    const day = firstSaturday.getDay();
-    let diff = 6 - day;
+
+    let diff = 6 - firstSaturday.getDay();
     if (diff <= 0) diff += 7;
 
     firstSaturday.setDate(firstSaturday.getDate() + diff);
@@ -74,51 +94,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const mm = String(firstSaturday.getMonth() + 1).padStart(2, '0');
     const dd = String(firstSaturday.getDate()).padStart(2, '0');
 
-    const minDateStr = `${yyyy}-${mm}-${dd}`;
-
-    trialDateInput.min = minDateStr;
+    trialDateInput.min = `${yyyy}-${mm}-${dd}`;
     trialDateInput.step = 7;
 
     trialDateInput.addEventListener('change', () => {
-      const selected = new Date(trialDateInput.value);
-      selected.setHours(0, 0, 0, 0);
+      const d = new Date(trialDateInput.value);
 
-      if (selected < firstSaturday || selected.getDay() !== 6) {
-        showMsg('日期錯誤', '體驗日期僅限「未來的星期六」');
+      if (!trialDateInput.value || d.getDay() !== 6) {
+        markError(trialDateInput);
+        showMsg('日期錯誤', '請選擇星期六');
         trialDateInput.value = '';
+        return;
       }
+
+      const text = `${d.getMonth() + 1}月${d.getDate()}日（星期六）`;
+      const hint = trialDateInput.parentElement.querySelector('.hint');
+      if (hint) hint.innerHTML = `✅ 已選：${text}`;
     });
   }
 
   /* =========================
-     ✅ Email 驗證
+     ✅ Email
   ========================= */
-  if (email) {
-    email.addEventListener('input', () => {
-      if (email.value && !email.checkValidity()) {
-        email.setCustomValidity('請輸入正確的 Email，例如：example@gmail.com');
-      } else {
-        email.setCustomValidity('');
-      }
-    });
-  }
+  email?.addEventListener('input', () => {
+    if (email.value && !email.checkValidity()) {
+      markError(email);
+    }
+  });
 
   /* =========================
      ✅ 電話格式
   ========================= */
-  phone.addEventListener('input', () => {
+  phone?.addEventListener('input', () => {
     let d = phone.value.replace(/\D/g, '').slice(0, 10);
     phone.value = d.length > 4 ? d.slice(0, 4) + '-' + d.slice(4) : d;
   });
 
   /* =========================
-     ✅ Message Modal
+     ✅ Modal
   ========================= */
   const overlay = document.createElement('div');
   overlay.id = 'messageOverlay';
   overlay.innerHTML = `
     <div class="message-box">
-      <div class="icon">✅</div>
       <h2 id="msgTitle"></h2>
       <div id="msgText"></div>
       <button id="msgClose">關閉</button>
@@ -137,79 +155,42 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* =========================
-     ✅ 表單送出（完整驗證整合）
+     ✅ 送出
   ========================= */
   btn.addEventListener('click', async () => {
 
-    // ✅ group 檢查（checkbox / radio）
     if (!checkGroupRequired()) return;
 
-    // ✅ HTML5 驗證
     if (!form.checkValidity()) {
+      const firstInvalid = form.querySelector(':invalid');
+      if (firstInvalid) {
+        markError(firstInvalid);
+      }
       form.reportValidity();
       return;
     }
 
-    // ✅ Email 再檢查
-    if (email && email.value && !email.checkValidity()) {
-      showMsg(
-        'Email 格式錯誤',
-        '請輸入正確 Email，例如 example@gmail.com'
-      );
-      email.focus();
-      return;
-    }
-
     btn.disabled = true;
+    btn.innerText = '送出中...';
 
     const fd = new FormData(form);
-    fd.set('guardian_phone', phone.value.toString());
 
     try {
-      const r = await fetch(API_URL, {
-        method: 'POST',
-        body: fd
-      });
+      const r = await fetch(API_URL, { method: 'POST', body: fd });
 
       if (r.ok) {
-        showMsg(
-          '報名完成',
-          `
-          <p>歡迎加入三峽社區棒球隊！</p>
-
-          <p><strong>Line ID：@406gxvsm</strong></p>
-
-          <h4>體驗提醒</h4>
-          <ul>
-            <li>運動服裝＋長褲＋帽子</li>
-            <li>棒球手套</li>
-            <li>飲水（建議 4000 c.c.）</li>
-          </ul>
-
-          <p><strong>時間：</strong>上午 8:30 到場</p>
-          <p><strong>費用：</strong>100 元（午餐）</p>
-          `
-        );
-
+        showMsg('報名完成', '歡迎加入三峽社區棒球隊！');
         form.reset();
-
-        const sibBlock = document.getElementById('siblingsNameBlock');
-        const sibNo = document.getElementById('sib_n');
-
-        if (sibBlock && sibNo) {
-          sibNo.checked = true;
-          sibBlock.style.display = 'none';
-        }
-
       } else {
-        showMsg('送出失敗', '系統發生問題，請稍後再試');
+        showMsg('送出失敗', '系統錯誤');
       }
 
     } catch {
-      showMsg('系統錯誤', '目前無法送出，請稍後再試');
+      showMsg('系統錯誤', '請稍後再試');
     }
 
     btn.disabled = false;
+    btn.innerText = '送出報名';
   });
 
 });
