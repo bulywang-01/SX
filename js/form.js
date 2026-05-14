@@ -238,33 +238,54 @@ document.addEventListener('DOMContentLoaded', () => {
       if (r.ok) 
       {
         showMsg(
-        '報名完成',
-        `歡迎加入三峽社區棒球隊的行列
+          '報名完成',
+          `
+          <div style="text-align:left; line-height:1.7;">
         
-        請務必加入本隊官方Line
-        並告知「已填寫完成報名體驗表」
-        以便後續通知球隊相關事務
-        官方Line ID：@406gxvsm
+            <p>✅ 歡迎加入三峽社區棒球隊！</p>
         
-        體驗當天請務必留意以下事項：
+            <p>
+              請務必加入本隊官方 Line，並告知「已填寫完成報名體驗表」，<br>
+              以便後續通知球隊相關事務
+            </p>
         
-        【裝備與準備】
-       　 1. 請穿著運動服裝與長褲，並配戴帽子。
-      　  2. 請自備：
-     　      棒球手套
-        　   足夠的飲水 或 運動飲料（建議至少 4000 c.c.）
+            <p>
+              <strong>📣 官方 Line ID：</strong><br>
+              <span style="font-size:16px; font-weight:bold;">@406gxvsm</span>
+            </p>
         
-        【報到方式】
-      　  請於早上 8:30 抵達球場，向現場的幹部報到即可。
+            <hr style="margin:16px 0; border:none; border-top:1px solid #eee;">
         
-        【體驗費用】
-       　 當天僅需負擔午餐費用 100 元。
+            <p><strong>⚾ 體驗當天請務必留意以下事項：</strong></p>
         
-        【練習地點】
-       　 土城媽祖田河濱公園棒球場
+            <p><strong>【裝備與準備】</strong></p>
+            <ul style="padding-left:18px; margin-top:6px;">
+              <li>請穿著運動服裝與長褲，並配戴帽子</li>
+              <li>請自備：
+                <ul style="padding-left:16px;">
+                  <li>棒球手套</li>
+                  <li>足夠的飲水或運動飲料（建議至少 4000 c.c.）</li>
+                </ul>
+              </li>
+            </ul>
         
-        【雨天備案】
-       　 若遇雨天，將於當日早上 7:00 前以Line方式通知備用場地，請留意訊息。`
+            <p><strong>【報到方式】</strong></p>
+            <p>請於早上 <strong>8:30</strong> 抵達球場，向現場幹部報到即可</p>
+        
+            <p><strong>【體驗費用】</strong></p>
+            <p>當天僅需負擔午餐費用 <strong>100 元</strong></p>
+        
+            <p><strong>【練習地點】</strong></p>
+            <p>土城媽祖田河濱公園棒球場</p>
+        
+            <p><strong>【雨天備案】</strong></p>
+            <p>
+              若遇雨天，將於當日早上 <strong>7:00</strong> 前<br>
+              以 Line 方式通知備用場地，請留意訊息
+            </p>
+        
+          </div>
+          `
         );
         form.reset();
       }
