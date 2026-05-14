@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const checkGroupRequired = () => {
     const groups = {};
 
-    document.querySelectorAll('[data-required="true"][data-group]')
+    document.querySelectorAll('[data-group]')
       .forEach(el => {
         const g = el.dataset.group;
         if (!groups[g]) groups[g] = [];
