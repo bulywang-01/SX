@@ -148,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const text = `${d.getMonth() + 1}月${d.getDate()}日（星期六）`;
       const hint = trialDateInput.parentElement.querySelector('.hint');
+      hint.setAttribute('data-origin', hint.innerHTML);
       if (hint) hint.innerHTML = `✅ 已選：${text}`;
     });
   }
