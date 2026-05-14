@@ -9,6 +9,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const trialDateInput = document.getElementById('trialDate');
 
   /* =========================
+     ✅ 中文欄位對照
+  ========================= */
+  const labelMap = {
+    name: '球員姓名',
+    trial_date: '希望體驗日期',
+    gender: '性別',
+    birthday: '出生年月日',
+    grade: '年級',
+    school: '就讀學校',
+    batting_hand: '打擊慣用手',
+    pitching_hand: '投球慣用手',
+    height_cm: '身高',
+    weight_kg: '體重',
+    guardian_name: '監護人姓名',
+    guardian_phone: '監護人電話',
+    guardian_email: '監護人 Email',
+    other_team_status: '是否曾加入其他球隊',
+    siblings_joined: '是否有兄弟姊妹',
+    siblings_names: '兄弟姊妹姓名',
+    parent_support: '家長協助',
+    baseball_level: '棒球接觸程度',
+    source: '招生來源'
+  };
+
+  /* =========================
      ✅ 必填控制
   ========================= */
   const applyRequired = () => {
@@ -25,18 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
   ========================= */
   const markError = (el) => {
     el.classList.add('input-error');
-
     const wrap = el.closest('label, .highlight-wrapper, div');
-    if (wrap) {
-      wrap.classList.add('error');
-      wrap.classList.add('shake');
-    }
+    wrap?.classList.add('error');
+    wrap?.classList.add('shake');
 
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-    setTimeout(() => {
-      wrap?.classList.remove('shake');
-    }, 400);
+    setTimeout(() => wrap?.classList.remove('shake'), 400);
   };
 
   const clearError = (el) => {
@@ -50,75 +70,65 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* =========================
-     ✅ group 驗證
+     ✅ 取得未填欄位（🔥核心）
   ========================= */
-  const checkGroupRequired = () => {
+  const getMissingFields = () => {
+
+    const missing = new Set();
+
+    // ===== 一般欄位 =====
+    form.querySelectorAll('[data-required="true"]').forEach(el => {
+
+      if (el.dataset.group) return;
+
+      if (!el.value) {
+
+        const label =
+          labelMap[el.name] ||
+          el.dataset.label ||
+          el.name;
+
+        missing.add(label);
+        markError(el);
+      }
+    });
+
+    // ===== 群組欄位 =====
     const groups = {};
 
-    document.querySelectorAll('[data-group]')
-      .forEach(el => {
-        const g = el.dataset.group;
-        if (!groups[g]) groups[g] = [];
-        groups[g].push(el);
-      });
+    document.querySelectorAll('[data-group]').forEach(el => {
+      const g = el.dataset.group;
+      if (!groups[g]) groups[g] = [];
+      groups[g].push(el);
+    });
 
     for (const groupName in groups) {
       const items = groups[groupName];
+
+      const required = items.some(i => i.dataset.required === 'true');
+      if (!required) continue;
+
       const hasChecked = items.some(i => i.checked);
 
       if (!hasChecked) {
-        const first = items[0];
-        
-        /* =========================
-           ✅ 中文欄位對照
-        ========================= */
 
-        const labelMap = {
-          name: '球員姓名',
-          trial_date: '希望體驗日期',
-        
-          gender: '性別',
-          birthday: '出生年月日',
-          grade: '年級',
-          school: '就讀學校',
-        
-          batting_hand: '打擊慣用手',
-          pitching_hand: '投球慣用手',
-          height_cm: '身高',
-          weight_kg: '體重',
-        
-          guardian_name: '監護人姓名',
-          guardian_phone: '監護人電話',
-          guardian_email: '監護人 Email',
-        
-          other_team_status: '是否曾加入其他球隊',
-          siblings_joined: '是否有兄弟姊妹',
-          siblings_names: '兄弟姊妹姓名',
-        
-          parent_support: '家長協助',
-        
-          baseball_level: '棒球接觸程度',
-        
-          source: '招生來源'
-        };
+        const first = items[0];
 
         const label =
           first.dataset.label ||
           labelMap[groupName] ||
-          labelMap[first.name] ||
           groupName;
-        
-        showMsg('資料未填', `請補齊以下欄位：「${label}」`);
-        
+
+        missing.add(label);
         markError(first);
-        return false;
       }
     }
-    return true;
+
+    return [...missing];
   };
 
   /* =========================
-     ✅ 日期限制 + 顯示星期
+     ✅ 日期限制＋顯示星期
   ========================= */
   if (trialDateInput) {
     const today = new Date();
@@ -148,13 +158,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const text = `${d.getMonth() + 1}月${d.getDate()}日（星期六）`;
       const hint = trialDateInput.parentElement.querySelector('.hint');
-      hint.setAttribute('data-origin', hint.innerHTML);
       if (hint) hint.innerHTML = `✅ 已選：${text}`;
     });
   }
 
   /* =========================
-     ✅ Email
+     ✅ Email 驗證
   ========================= */
   email?.addEventListener('input', () => {
     if (email.value && !email.checkValidity()) {
@@ -195,31 +204,23 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* =========================
-     ✅ 送出
+     ✅ 送出（🔥完整 UX）
   ========================= */
   btn.addEventListener('click', async () => {
 
-    if (!checkGroupRequired()) return;
+    const missingFields = getMissingFields();
 
-    if (!form.checkValidity()) {
-    
-      const firstInvalid = form.querySelector(':invalid');
-    
-      if (firstInvalid) {
-        markError(firstInvalid);
-    
-        const label =
-          labelMap[firstInvalid.name] ||
-          firstInvalid.dataset.label ||
-          firstInvalid.name;
-    
-        showMsg('資料未填', `請填寫：「${label}」`);
-    
-        firstInvalid.focus();
-        return;
-      }
-    
-      form.reportValidity();
+    if (missingFields.length > 0) {
+
+      const listHtml = missingFields
+        .map(f => `・${f}`)
+        .join('<br>');
+
+      showMsg(
+        '資料未填',
+        `請補以下欄位：<br><br>${listHtml}`
+      );
+
       return;
     }
 
@@ -229,7 +230,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const fd = new FormData(form);
 
     try {
-      const r = await fetch(API_URL, { method: 'POST', body: fd });
+      const r = await fetch(API_URL, {
+        method: 'POST',
+        body: fd
+      });
 
       if (r.ok) {
         showMsg('報名完成', '歡迎加入三峽社區棒球隊！');
