@@ -245,13 +245,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>✅ 歡迎加入三峽社區棒球隊！</p>
         
             <p>
-              請務必加入本隊官方 Line，並告知「已填寫完成報名體驗表」，<br>
-              以便後續通知球隊相關事務
+              請務必加入本隊官方 Line，並告知「已填寫完成報名體驗表」，以便後續通知球隊相關事務
             </p>
         
             <p>
-              <strong>📣 官方 Line ID：</strong><br>
-              <span style="font-size:16px; font-weight:bold;">@406gxvsm</span>
+              <strong>📣 官方 Line ID：</strong><span style="font-size:16px; font-weight:bold;">@406gxvsm</span>
             </p>
         
             <hr style="margin:16px 0; border:none; border-top:1px solid #eee;">
@@ -270,20 +268,16 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
         
             <p><strong>【報到方式】</strong></p>
-            <p>請於早上 <strong>8:30</strong> 抵達球場，向現場幹部報到即可</p>
+            <p>　　請於早上 <strong>8:30</strong> 抵達球場，向現場幹部報到即可</p>
         
             <p><strong>【體驗費用】</strong></p>
-            <p>當天僅需負擔午餐費用 <strong>100 元</strong></p>
+            <p>　　當天僅需負擔午餐費用 <strong>100 元</strong></p>
         
             <p><strong>【練習地點】</strong></p>
-            <p>土城媽祖田河濱公園棒球場</p>
+            <p>　　土城媽祖田河濱公園棒球場</p>
         
             <p><strong>【雨天備案】</strong></p>
-            <p>
-              若遇雨天，將於當日早上 <strong>7:00</strong> 前<br>
-              以 Line 方式通知備用場地，請留意訊息
-            </p>
-        
+            <p>　　若遇雨天，將於當日早上 <strong>7:00</strong> 前以 Line 方式通知備用場地，請留意訊息</p>
           </div>
           `
         );
