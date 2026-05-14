@@ -70,7 +70,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const first = items[0];
         const label = first.dataset.label || groupName;
 
-        showMsg('資料未填', `請至少選擇一項：「${label}」`);
+        const labelMap = {
+          name: '球員姓名',
+          trial_date: '希望體驗日期',
+        
+          gender: '性別',
+          birthday: '出生年月日',
+          grade: '年級',
+          school: '就讀學校',
+        
+          batting_hand: '打擊慣用手',
+          pitching_hand: '投球慣用手',
+          height_cm: '身高',
+          weight_kg: '體重',
+        
+          guardian_name: '監護人姓名',
+          guardian_phone: '監護人電話',
+          guardian_email: '監護人 Email',
+        
+          other_team_status: '是否曾加入其他球隊',
+          siblings_joined: '是否有兄弟姊妹',
+          siblings_names: '兄弟姊妹姓名',
+        
+          parent_support: '家長協助',
+        
+          baseball_level: '棒球接觸程度',
+        
+          source: '招生來源'
+        };
+        
+        const label =
+          first.dataset.label ||
+          labelMap[groupName] ||
+          labelMap[first.name] ||
+          groupName;
+        
+        showMsg('資料未填', `請補齊以下欄位：「${label}」`);
+        
         markError(first);
         return false;
       }
@@ -162,10 +198,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!checkGroupRequired()) return;
 
     if (!form.checkValidity()) {
+    
       const firstInvalid = form.querySelector(':invalid');
+    
       if (firstInvalid) {
         markError(firstInvalid);
+    
+        const label =
+          labelMap[firstInvalid.name] ||
+          firstInvalid.dataset.label ||
+          firstInvalid.name;
+    
+        showMsg('資料未填', `請填寫：「${label}」`);
+    
+        firstInvalid.focus();
+        return;
       }
+    
       form.reportValidity();
       return;
     }
