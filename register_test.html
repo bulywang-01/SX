@@ -301,32 +301,31 @@
     <!-- 球員 -->
     <h3>球員基本資料</h3>
     <div class="form-grid">
-
       <label>
         球員姓名
-        <input name="name" required>
+        <input name="name" data-required="true">
       </label>
     
       <div class="highlight-wrapper">
         <label>
-          請選擇您希望的 <strong>體驗日期</strong>
-          <input type="date" name="trial_date" id="trialDate" required>
+          希望體驗日期（僅限週六）
+          <input type="date" name="trial_date" id="trialDate" data-required="true">
+          <div class="hint hint-warning">
+            ※ 球隊將依此日期安排體驗，請務必確認
+          </div>
         </label>
-         <div class="hint"><strong>※ 球隊將依此日期安排體驗，請務必確認</strong></div>
-     </div>
-
-
+      </div>
 
       <div class="form-full">
         <label>性別</label>
         <div class="option-group">
-          <div class="option"><input type="radio" id="g_m" name="gender" value="男" required><label for="g_m">男</label></div>
-          <div class="option"><input type="radio" id="g_f" name="gender" value="女"><label for="g_f">女</label></div>
+          <div class="option"><input type="radio" name="gender" value="男" data-required="true" data-group="gender"><label for="g_m">男</label></div>
+          <div class="option"><input type="radio" name="gender" value="女" data-group="gender"><label for="g_f">女</label></div>
         </div>
       </div>
 
       <label>出生年月日
-        <input type="date" name="birthday" required>
+        <input type="date" name="birthday" data-required="true">
       </label>
 
       <label>年級（依現況填寫，6-8月填表及畢業生填新年級）
@@ -374,13 +373,13 @@
       </div>
 
       <label>身高（公分）
-        <input name="height_cm">
-        <div class="hint">可選填</div>
+        <input name="height_cm" data-required="true">
+        <!-- <div class="hint">可選填</div> -->
       </label>
 
       <label>體重（公斤）
-        <input name="weight_kg">
-        <div class="hint">可選填</div>
+        <input name="weight_kg" data-required="true">
+        <!-- <div class="hint">可選填</div> -->
       </label>
 
     </div>
@@ -389,15 +388,10 @@
     <h3>監護人聯絡資料</h3>
     <div class="form-grid">
       <label class="form-full">監護人姓名
-        <input name="guardian_name" required>
+        <input name="guardian_name" data-required="true">
       </label>
       <label>監護人電話
-        <input
-          name="guardian_phone"
-          placeholder="09xx-xxxxxx"
-          required
-          inputmode="numeric"
-        >
+        <input name="guardian_phone" placeholder="09xx-xxxxxx" data-required="true">
       </label>
       <label>監護人 Email
         <input
@@ -406,8 +400,8 @@
           id="guardianEmail"
           placeholder="example@gmail.com"
           inputmode="email"
+          data-required="true"
         >
-
       </label>
     </div>
 
@@ -446,36 +440,36 @@
       <div class="form-full">
         <label>請問您從何得知三峽社區棒球隊？（可複選）</label>
         <div class="option-group">
-    
+          
           <div class="option">
-            <input type="checkbox" id="src_champion" name="source_champion" value="1">
+            <input type="checkbox" id="src_champion" name="source_champion" data-required="true" data-group="source" value="1" data-label="招生來源">
             <label for="src_champion">
               我知道這球隊是114年度全國社區學生棒球大賽冠軍
             </label>
           </div>
     
           <div class="option">
-            <input type="checkbox" id="src_fb" name="source_facebook" value="1">
+            <input type="checkbox" id="src_fb" name="source_facebook" data-group="source" value="1">
             <label for="src_fb">球隊 FB 官網</label>
           </div>
     
           <div class="option">
-            <input type="checkbox" id="src_friend" name="source_friend" value="1">
+            <input type="checkbox" id="src_friend" name="source_friend" data-group="source" value="1">
             <label for="src_friend">親友介紹</label>
           </div>
     
           <div class="option">
-            <input type="checkbox" id="src_flyer" name="source_flyer" value="1">
+            <input type="checkbox" id="src_flyer" name="source_flyer" data-group="source" value="1">
             <label for="src_flyer">紙本傳單</label>
           </div>
     
           <div class="option">
-            <input type="checkbox" id="src_store" name="source_store" value="1">
+            <input type="checkbox" id="src_store" name="source_store" data-group="source" value="1">
             <label for="src_store">貼於店家的廣告單</label>
           </div>
     
           <div class="option">
-            <input type="checkbox" id="src_other" name="source_other" value="1">
+            <input type="checkbox" id="src_other" name="source_other" data-group="source" value="1">
             <label for="src_other">其他</label>
           </div>
     
@@ -485,6 +479,8 @@
 </div>
   
     <h3>家長是否願意協助隊務</h3>
+<input type="radio" name="parent_support" data-group="parent_support">
+<input type="radio" name="parent_support" data-group="parent_support">
 
 <div class="option-group long-options">
     <div class="option-group">
@@ -493,8 +489,10 @@
           type="radio"
           id="ps_yes"
           name="parent_support"
+          data-group="parent_support"
           value="我很樂意協助，請找我"
-          required
+          data-required="true"
+          data-label="家長協助"
         >
         <label for="ps_yes">我很樂意協助，請找我</label>
       </div>
@@ -504,6 +502,7 @@
           type="radio"
           id="ps_maybe"
           name="parent_support"
+          data-group="parent_support"
           value="視情況，有空的時候可以協助"
         >
         <label for="ps_maybe">視情況，有空的時候可以協助</label>
@@ -514,6 +513,7 @@
           type="radio"
           id="ps_no"
           name="parent_support"
+          data-group="parent_support"
           value="我可能工作或其它事務繁忙，沒辦法協助"
         >
         <label for="ps_no">我可能工作或其它事務繁忙，沒辦法協助</label>
