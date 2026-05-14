@@ -69,12 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!hasChecked) {
         const first = items[0];
         
-        const label =
-          first.dataset.label ||
-          labelMap[groupName] ||
-          labelMap[first.name] ||
-          groupName;
-        
+        /* =========================
+           ✅ 中文欄位對照
+        ========================= */
+
         const labelMap = {
           name: '球員姓名',
           trial_date: '希望體驗日期',
@@ -103,6 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
           source: '招生來源'
         };
+
+        const label =
+          first.dataset.label ||
+          labelMap[groupName] ||
+          labelMap[first.name] ||
+          groupName;
         
         showMsg('資料未填', `請補齊以下欄位：「${label}」`);
         
