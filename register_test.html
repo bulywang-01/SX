@@ -302,88 +302,132 @@
     <!-- 球員 -->
     <h3>球員基本資料</h3>
     <div class="form-grid">
-      <label for="name">
+    
+      <!-- 姓名 -->
+      <label>
         球員姓名
         <input name="name" data-required="true">
       </label>
     
+      <!-- 體驗日期 -->
       <div class="highlight-wrapper">
-        <label class="form-full">
+        <label>
           希望體驗日期（僅限週六）
           <input type="date" name="trial_date" id="trialDate" data-required="true">
-          <div class="hint hint-warning">
-            ※ 球隊將依此日期安排體驗，請務必確認
-          </div>
+          <div class="hint">※ 球隊將依此日期安排體驗，請務必確認</div>
         </label>
       </div>
-
-      <div class="form-full">
+    
+      <!-- ✅ 性別（左） -->
+      <div>
         <label>性別</label>
-
         <div class="option-group">
-          <div class="option"><input type="radio" id="g_m" name="gender" value="男" data-required="true" data-group="gender" data-label="性別"><label for="g_m">男</label></div>
-          <div class="option"><input type="radio" id="g_f" name="gender" value="女" data-required="true" data-group="gender" data-label="性別"><label for="g_f">女</label></div>
+          <div class="option">
+            <input type="radio" id="g_m" name="gender"
+                   value="男"
+                   data-required="true"
+                   data-group="gender"
+                   data-label="性別">
+            <label for="g_m">男</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="g_f" name="gender"
+                   value="女"
+                   data-required="true"
+                   data-group="gender">
+            <label for="g_f">女</label>
+          </div>
         </div>
       </div>
-
-      <label>出生年月日
+    
+      <!-- ✅ 出生年月日（右） -->
+      <label>
+        出生年月日
         <input type="date" name="birthday" data-required="true">
       </label>
-
-      <label>年級（依現況填寫，6-8月填表及畢業生填新年級）
-        <input name="grade">
+    
+      <!-- ✅ 就讀學校（左） -->
+      <label>
+        就讀學校（依現況填寫，畢業生填新校名）
+        <input name="school" data-required="true">
       </label>
-
-      <label class="form-full">就讀學校（依現況填寫，畢業生填新校名）
-        <input name="school">
+    
+      <!-- ✅ 年級（右） -->
+      <label>
+        年級（依現況填寫，6-8月填表及畢業生填新年級）
+        <input name="grade" data-required="true">
       </label>
-
+    
+      <!-- 打擊 -->
       <div>
         <label>打擊慣用手</label>
         <div class="option-group">
           <div class="option">
-            <input type="radio" id="bat_r" name="batting_hand" value="右" required>
+            <input type="radio" id="bat_r" name="batting_hand"
+                   value="右"
+                   data-required="true"
+                   data-group="batting_hand"
+                   data-label="打擊慣用手">
             <label for="bat_r">右</label>
           </div>
           <div class="option">
-            <input type="radio" id="bat_l" name="batting_hand" value="左">
+            <input type="radio" id="bat_l" name="batting_hand"
+                   value="左"
+                   data-required="true"
+                   data-group="batting_hand">
             <label for="bat_l">左</label>
           </div>
           <div class="option">
-            <input type="radio" id="bat_b" name="batting_hand" value="左右">
+            <input type="radio" id="bat_b" name="batting_hand"
+                   value="左右"
+                   data-required="true"
+                   data-group="batting_hand">
             <label for="bat_b">左右</label>
           </div>
         </div>
       </div>
-
+    
+      <!-- 投球 -->
       <div>
         <label>投球慣用手</label>
         <div class="option-group">
           <div class="option">
-            <input type="radio" id="pit_r" name="pitching_hand" value="右" required>
+            <input type="radio" id="pit_r" name="pitching_hand"
+                   value="右"
+                   data-required="true"
+                   data-group="pitching_hand"
+                   data-label="投球慣用手">
             <label for="pit_r">右</label>
           </div>
           <div class="option">
-            <input type="radio" id="pit_l" name="pitching_hand" value="左">
+            <input type="radio" id="pit_l" name="pitching_hand"
+                   value="左"
+                   data-required="true"
+                   data-group="pitching_hand">
             <label for="pit_l">左</label>
           </div>
           <div class="option">
-            <input type="radio" id="pit_b" name="pitching_hand" value="左右">
+            <input type="radio" id="pit_b" name="pitching_hand"
+                   value="左右"
+                   data-required="true"
+                   data-group="pitching_hand">
             <label for="pit_b">左右</label>
           </div>
         </div>
       </div>
-
-      <label>身高（公分）
+    
+      <!-- 身高 -->
+      <label>
+        身高（公分）
         <input name="height_cm" data-required="true">
-        <!-- <div class="hint">可選填</div> -->
       </label>
-
-      <label>體重（公斤）
+    
+      <!-- 體重 -->
+      <label>
+        體重（公斤）
         <input name="weight_kg" data-required="true">
-        <!-- <div class="hint">可選填</div> -->
       </label>
-
+    
     </div>
 
     <!-- 監護人 -->
